@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CP problems Search Engine</title>
+	<link rel="stylesheet" href="{% static 'engine/css/mycss.css' %}">
+</head>
+<body>
+<div class="container-result">
+    <div class="result_head">
+        <div class="logo1"><span class="s1">C</span><span class="s2">P </span><span class="s3">E</span><span class="s4">n</span><span class="s5">g</span><span class="s6">i</span><span class="s7">n</span><span class="s8">e</span></div>
+        <form method="POST" action="/search/">
+            {% csrf_token %}
+            <input class="input" type="text" name="search" placeholder='search'>
+            <button class="search_button" type="submit">search</button>
+        </form>
+    </div>
+    {% for problem in result %}
+    <div class="result-box">
+        <h3 class="me">{{ problem.name }}</h3>
+        <a class="metoo" href="{{ problem.url }}">{{ problem.url }}</a>
+        <h5 class="metooo">tags: {{ problem.tag }}</h5>
+        <h5 class="metooo">Asked in contest: {{ problem.contest }}</h5>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
